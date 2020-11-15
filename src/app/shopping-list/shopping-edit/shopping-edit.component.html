@@ -1,24 +1,24 @@
 <div class="row">
     <div class="col-xs-12">
-        <form>
+        <form (ngSubmit)="onAddEvent(f)"  #f="ngForm">
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="name">Name : </label>
-                    <input type="text" id="name" class="form-control" #inputName>
+                    <input type="text" id="name" class="form-control" name = "name" ngModel required>
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="quantity">Quantity : </label>
-                    <input type="text" id="quantity" class="form-control" #inputQuantity>
+                    <input type="text" id="quantity" class="form-control" name="quantity" ngModel required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="btn-toolbar">
-                        <button class="btn btn-success" type="submit" (click)="onAddEvent()">
-                            Add</button>
-                        <button class="btn btn-danger" type="button">Delete</button>
-                        <button class="btn btn-primary" type="button">Clear</button>
-                    </div>
+                        <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+                        {{isEditMode ? "Edit" : "Add"}}</button>
+                        <button class="btn btn-danger" type="button" (click)="onDelete()">Delete</button>
+                        <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+                    </div>   
                 </div>
             </div>
         </form>

@@ -5,8 +5,8 @@
 
             <hr>
             <ul class="list-group">
-                <a class="list-group-item" style="cursor : pointer" *ngFor="let ingredient of ingredients">{{ingredient.name}} ({{ingredient.quantity}})</a>
+                <a class="list-group-item" style="cursor : pointer" *ngFor="let ingredient of ingredients; let i =index" (click)="onClick(i)">{{ingredient.name}} ({{ingredient.quantity}})</a>
             </ul>
         </div>
     </div>
-</div>
+</div> 

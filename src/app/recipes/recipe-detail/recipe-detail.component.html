@@ -21,11 +21,13 @@
       </button>
       <ul class="dropdown-menu">
         <li>
-          <a style="cursor : pointer;" (click)="addIngredientsToShoppingList()"
+          <a style="cursor: pointer" (click)="addIngredientsToShoppingList()"
             >To Shopping List</a
           >
         </li>
-        <li><a style="cursor : pointer;" (click)="onNavigate()">Edit Recipe</a></li> 
+        <li>
+          <a style="cursor: pointer" (click)="onNavigate()">Edit Recipe</a>
+        </li>
         <li><a href="#">Delete Recipe</a></li>
       </ul>
     </div>
@@ -33,8 +35,12 @@
 </div>
 <hr />
 <div class="row">
-    <div><ul>
-        <li *ngFor ="let ingredient of recipe.ingredients">{{ingredient.name}} - {{ingredient.quantity}}</li>
-    </ul></div>
+  <div>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} - {{ ingredient.quantity }}
+      </li>
+    </ul>
+  </div>
   <div class="col-xs-12">Description : {{ recipe.description }}</div>
 </div>
