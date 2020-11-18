@@ -26,10 +26,16 @@ export class RecipeService
   addRecipe(recipe: Recipe)
   {
     this.recipes.push(recipe);
+    this.addOrUpdateEvent.next(this.recipes);
   }
   updateRecipe(index: number, recipe: Recipe)
   {
     this.recipes[index] = recipe;
+    this.addOrUpdateEvent.next(this.recipes);
+  }
+  onDelete(index: number)
+  {
+    this.recipes.splice(index, 1);
     this.addOrUpdateEvent.next(this.recipes);
   }
   getRecipes()
