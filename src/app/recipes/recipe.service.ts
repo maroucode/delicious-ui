@@ -23,6 +23,10 @@ export class RecipeService
   ];
   addOrUpdateEvent = new Subject<Recipe[]>();
   selectedRecipeEvent = new EventEmitter<Recipe>();
+  setRecipes(recipes : Recipe[]){
+    this.recipes = recipes;
+    this.addOrUpdateEvent.next(this.recipes.slice());
+  }
   addRecipe(recipe: Recipe)
   {
     this.recipes.push(recipe);
