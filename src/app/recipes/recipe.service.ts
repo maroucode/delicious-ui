@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 export class RecipeService
 {
   constructor(private shoppinglistService: ShoppingListService) { }
-  private recipes: Recipe[] = [
+  /*private recipes: Recipe[] = [
     new Recipe(
       'Pizza',
       'This is simply a test',
@@ -20,7 +20,8 @@ export class RecipeService
       'https://www.welcometothetable.coop/sites/default/files/Shakshuka_with_Spinach.jpg',
       [new Ingredient('Meat', '3'), new Ingredient('Sauce', '2')]
     ),
-  ];
+  ];*/
+   private recipes: Recipe[] = [];
   addOrUpdateEvent = new Subject<Recipe[]>();
   selectedRecipeEvent = new EventEmitter<Recipe>();
   setRecipes(recipes : Recipe[]){

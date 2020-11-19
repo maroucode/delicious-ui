@@ -5,9 +5,10 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeStarterComponent } from './recipes/recipe-starter/recipe-starter.component';
+import { RecipesResolverService } from './shared/recipes-resolver.service';
 
 const routes: Routes = [{ path: '', redirectTo: 'recipes', pathMatch: 'full' },
-{ path: 'recipes', component: RecipesComponent , children :[{path:'',component:RecipeStarterComponent},{path:'new',component:RecipeEditComponent},{path:':index',component:RecipeDetailComponent},{path:':index/edit',component:RecipeEditComponent}]},
+{ path: 'recipes', component: RecipesComponent , children :[{path:'',component:RecipeStarterComponent},{path:'new',component:RecipeEditComponent},{path:':index',component:RecipeDetailComponent, resolve:[RecipesResolverService]},{path:':index/edit',component:RecipeEditComponent,resolve:[RecipesResolverService]}]},
 { path: 'shopping-list', component: ShoppingListComponent }
 ];
 
