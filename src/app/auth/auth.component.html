@@ -1,22 +1,27 @@
 <div class="row" style="align-content: center;">
+
 	<div class="col-xs-12  col-md-6">
-		<form>
-			<div class="form-row align-items-center">
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="text" class="form-control" name="email" id="email" email required>
+		 <span id="errorMessage" class="text-danger">
+          {{errorMessage}}
+		 </span> 
+		<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" class="form-control" name="email" id="email" ngModel email required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="password" id="password" ngModel required>
+			</div>
+			<div class="row">
+				<div class="col-xs-6"><button type="submit" class="btn btn-success"
+						[disabled]="!f.valid">{{isSignInMode ? "Sign In" : "Sign Up"}}</button></div>
+				<div class="col-xs-6"><button type="button" (click)="switchMode()"
+						class="btn btn-success">{{isSignInMode ? "Switch to Sign Up" : "Swith to Sign In"}}</button>
+						
 				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" class="form-control" name="password" id="password" required>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><button type="submit"
-							class="btn btn-success">{{isSignInMode ? "Sign In" : "Sign Up"}}</button></div>
-					<div class="col-xs-6"><button type="button" (click)="switchMode()"
-							class="btn btn-success">{{isSignInMode ? "Switch to Sign Up" : "Swith to Sign In"}}</button>
-					</div>
-				</div>
+			
 			</div>
 		</form>
 	</div>
