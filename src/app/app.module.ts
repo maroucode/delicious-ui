@@ -20,6 +20,7 @@ import { RecipeStarterComponent } from './recipes/recipe-starter/recipe-starter.
 import { RecipeService } from './recipes/recipe.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthenticationService } from './auth/authentication.service';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthenticationService } from './auth/authentication.service';
     DropDownDirective,
     RecipeEditComponent,
     RecipeStarterComponent,
-    AuthComponent
+    AuthComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
