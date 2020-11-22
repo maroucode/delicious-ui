@@ -20,6 +20,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   providers: [
     ShoppingListService,
     RecipeService,
+    AuthGuardService,
     AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,

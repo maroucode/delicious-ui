@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
-import { User } from './user.model';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from './user.model';
 
 export interface AuthData {
   idToken: string;
@@ -18,6 +17,7 @@ export interface AuthData {
 @Injectable()
 export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
+  tokenExpirationTimer;
   user = new BehaviorSubject<User>(null);
 
   singUp(email: string, password: string) {
@@ -48,7 +48,11 @@ export class AuthenticationService {
       );
   }
   signOut() {
-    localStorage.setItem('userData',null);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
     this.user.next(null);
     this.router.navigate(['/auth']);
   }
@@ -67,12 +71,20 @@ export class AuthenticationService {
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
-    console.log(user);
+    this.autoSignOut(
+      new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+    );
+
     if (user.token) {
-      console.log(user.token);
       this.user.next(user);
       this.router.navigate(['/recipes']);
     }
+  }
+
+  autoSignOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.signOut();
+    }, expirationDuration);
   }
 
   handleResponse(resData: AuthData) {
@@ -86,6 +98,7 @@ export class AuthenticationService {
       expirationDate
     );
     localStorage.setItem('userData', JSON.stringify(user));
+    this.autoSignOut(+resData.expiresIn * 1000);
     this.router.navigate(['/recipes']);
     this.user.next(user);
   }
