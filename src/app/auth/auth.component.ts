@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { AuthenticationService } from './authentication.service';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { AuthData, AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +12,7 @@ export class AuthComponent implements OnInit {
   isSignInMode: boolean = false;
   errorMessage: string;
   isLoading: boolean = false;
+  authObserver: Observable<AuthData>;
 
   constructor(private authService: AuthenticationService) {}
 
@@ -26,28 +26,20 @@ export class AuthComponent implements OnInit {
     const password = form.value.password;
     this.isLoading = true;
     if (!this.isSignInMode) {
-      this.authService.singUp(email, password).subscribe(
-        (resdata) => {
-          console.log(resdata);
-          this.isLoading = false;
-        },
-        (errorMessage) => {
-          this.errorMessage = errorMessage;
-          this.isLoading = false;
-        }
-      );
+      this.authObserver = this.authService.singUp(email, password);
     } else {
-      this.authService.singIn(email, password).subscribe(
-        (resdata) => {
-          console.log(resdata);
-          this.isLoading = false;
-        },
-        (error) => {
-          this.errorMessage = error.error.error.message;
-          this.isLoading = false;
-        }
-      );
+      this.authObserver = this.authService.singIn(email, password);
     }
+    this.authObserver.subscribe(
+      (resdata) => {
+        console.log(resdata);
+        this.isLoading = false;
+      },
+      (errorMessage) => {
+        this.errorMessage = errorMessage;
+        this.isLoading = false;
+      }
+    );
     form.reset();
   }
 }
