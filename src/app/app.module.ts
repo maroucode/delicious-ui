@@ -21,6 +21,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { AlertComponent } from './shared/alert/alert.component';
+import { AlertHolderDirective } from './shared/alert-holder.directive';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AuthGuardService } from './auth/auth-guard.service';
     RecipeStarterComponent,
     AuthComponent,
     SpinnerComponent,
+    AlertComponent,
+    AlertHolderDirective,
   ],
   imports: [
     BrowserModule,
