@@ -77,6 +77,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.alertSub.unsubscribe();
     });
   }
+  //make sure that all subjects are unsubscribed
   ngOnDestroy() {
     if (this.alertSub) {
       this.alertSub.unsubscribe();
