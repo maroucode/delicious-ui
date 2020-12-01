@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-    { path: '', component: AuthComponent }
+    { path: 'auth', component: AuthComponent }
   ];
 @NgModule({ 
   declarations: [AuthComponent],
