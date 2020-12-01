@@ -6,12 +6,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-    { path: 'auth', component: AuthComponent }
+    { path: '', component: AuthComponent }
   ];
-
-@NgModule({
+@NgModule({ 
   declarations: [AuthComponent],
-  imports: [FormsModule, CommonModule, SharedModule, RouterModule.forChild(routes)],
-  exports: [],
+  imports: [
+    FormsModule,
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes)
+  ]
 })
 export class AuthModule {}

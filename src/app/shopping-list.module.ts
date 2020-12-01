@@ -7,7 +7,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { SharedModule } from './shared.module';
 
 const routes: Routes = [
-  { path: 'shopping-list', component: ShoppingListComponent },
+  { path: '', component: ShoppingListComponent },
 ];
 @NgModule({
   declarations: [ShoppingListComponent, ShoppingEditComponent],

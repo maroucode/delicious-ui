@@ -11,40 +11,45 @@ import { RecipeStarterComponent } from './recipes/recipe-starter/recipe-starter.
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipesResolverService } from './shared/recipes-resolver.service';
 import { SharedModule } from './shared.module';
-
+import { AuthModule } from './auth.module';
 
 const routes: Routes = [
-    {
-      path: 'recipes',
-      component: RecipesComponent,
-      canActivate: [AuthGuardService],
-      children: [
-        { path: '', component: RecipeStarterComponent },
-        { path: 'new', component: RecipeEditComponent },
-        {
-          path: ':index',
-          component: RecipeDetailComponent,
-          resolve: [RecipesResolverService],
-        }, 
-        {
-          path: ':index/edit',
-          component: RecipeEditComponent,
-          resolve: [RecipesResolverService],
-        },
-      ],
-    } ];
-  
+  {
+    path: '',
+    component: RecipesComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      { path: '', component: RecipeStarterComponent },
+      { path: 'new', component: RecipeEditComponent },
+      {
+        path: ':index',
+        component: RecipeDetailComponent,
+        resolve: [RecipesResolverService],
+      },
+      {
+        path: ':index/edit',
+        component: RecipeEditComponent,
+        resolve: [RecipesResolverService],
+      },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
-      
     RecipesComponent,
     RecipeListComponent,
     RecipeItemComponent,
     RecipeDetailComponent,
-    RecipeEditComponent, 
-    RecipeStarterComponent
+    RecipeEditComponent,
+    RecipeStarterComponent,
   ],
-  imports: [SharedModule, CommonModule,ReactiveFormsModule,RouterModule.forChild(routes)] 
+  imports: [
+    SharedModule,
+    CommonModule,
+    ReactiveFormsModule,
+    AuthModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class RecipesModule {}
