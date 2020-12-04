@@ -12,6 +12,7 @@ import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
+  //a store should be included
   constructor(
     private authService: AuthenticationService,
     private router: Router
