@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AuthenticationService } from './auth/authentication.service';
 
 @Component({
@@ -8,8 +8,14 @@ import { AuthenticationService } from './auth/authentication.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private authServie: AuthenticationService) {}
+  constructor(
+    private authServie: AuthenticationService,
+    @Inject(PLATFORM_ID) private platformId
+  ) {}
   ngOnInit() {
-    this.authServie.autoSignIn();
+    if (isPlatformBrowser(this.platformId)) {
+      this.authServie.autoSignIn();
+    }
+    console.log('Hello world'); 
   }
 }
