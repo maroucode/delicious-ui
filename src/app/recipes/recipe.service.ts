@@ -52,6 +52,7 @@ export class RecipeService
   {
     this.shoppinglistService.addIngredients(ingredients);
   }
+  //Unit test to be added 
   getRecipe(index: number)
   {
     return this.recipes.slice()[index];
